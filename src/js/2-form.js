@@ -1,14 +1,13 @@
-"use strict"
-
 const feedbackForm = document.querySelector(".feedback-form");
 const localStorageKey = "feedback-form-state";
 
 const { email, message } = feedbackForm.elements;
 
-let initialFormData = JSON.parse(localStorage.getItem(localStorageKey)) || {};
+let initialFormData; 
 
 try {
-    if (initialFormData) {
+initialFormData = JSON.parse(localStorage.getItem(localStorageKey)) || {};
+        if (initialFormData) {
         email.value = initialFormData.email || "";
         message.value = initialFormData.message || "";
     }
@@ -24,7 +23,7 @@ feedbackForm.addEventListener("input", event => {
 
 feedbackForm.addEventListener("submit", (event) => {
     event.preventDefault();
-    if (!initialFormData.email || !initialFormData.message) { 
+    if (!email.value || !message.value) { 
         alert("Fill all the fields");
         return;
     };
